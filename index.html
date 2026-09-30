@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Scholarship Monitoring System</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<main class="auth-page">
+  <section class="auth-card">
+    <h1>Student Scholarship Monitoring System</h1>
+    <p>Academic Compliance and Scholarship Monitoring</p>
+    <form id="loginForm">
+      <label>Email</label>
+      <input id="email" type="email" placeholder="Enter email" required>
+      <label>Password</label>
+      <input id="password" type="password" placeholder="Enter password" required>
+      <button type="submit" class="primary-btn">Login</button>
+      <div id="loginMessage" class="message"></div>
+    </form>
+    <div class="demo-credentials">
+      <strong>Demo Accounts</strong><br>
+      Admin: admin@gmail.com / Admin@12345<br>
+      Student: student@gmail.com / Student@12345
+    </div>
+  </section>
+</main>
+<script src="js/config.js"></script>
+<script src="js/app.js"></script>
+<script>
+document.getElementById('loginForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const email=document.getElementById('email').value.trim().toLowerCase();
+  const password=document.getElementById('password').value;
+  const msg=document.getElementById('loginMessage');
+  const result=DemoAuth.login(email,password);
+  if(!result.ok){ msg.textContent=result.message; msg.className='message error'; return; }
+  window.location.href=result.user.role==='admin'?'admin.html':'student.html';
+});
+</script>
+</body>
+</html>
